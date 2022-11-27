@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="JamesSenSquareEnixSSEC" options="--add-exports java.xml/jdk.xml.internal=ALL-UNNAMED" />
+      <module name="JamesSenSquareEnixSSEC" options="" />
     </option>
   </component>
 </project>
