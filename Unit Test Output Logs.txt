@@ -1,0 +1,56 @@
+Invalid Date Test
+
+Nov 27, 2022 12:26:13 PM SSEC.HTTPHandlerTest sendMessage
+INFO: Message Sent to Server: [{ "s__uuid" : "ABC123", "s__name" : "row_1", "d__timestamp" : "2022-11-23T15:21:50.123456Z"}
+{ "s__uuid" : "DEF234", "s__name" : "row_2", "d__timestamp" : "2022-23-11T15:21:50.123456Z"}
+{ "s__uuid" : "GHI345", "s__name" : "row_3", "d__timestamp" : "NOT_A_TIMESTAMP"}
+{ "s__uuid" : "JKL345", "s__name" : "row_4"}
+{ "s__name" : "row_5", "d__timestamp" : "2022-11-23T15:21:50.123456Z"}
+{ "s__uuid" : "MNO456", "d__timestamp" : "2022-11-23T15:21:50.123456Z"}
+{ "s__uuid" : "PQR567", "s__name" : "row_6", "d__timestamp" : "2022-11-23T15:21:50.123456Z"}]
+Nov 27, 2022 12:26:14 PM SSEC.HTTPHandlerTest readResponseStream
+INFO: Message Received from Server: ResponseCode 400 - Cannot deserialize value of type `java.util.Date` from String "NOT_A_TIMESTAMP": not a valid representation (error: Failed to parse Date value 'NOT_A_TIMESTAMP': Cannot parse date "NOT_A_TIMESTAMP": not compatible with any of standard forms ("yyyy-MM-dd'T'HH:mm:ss.SSSX", "yyyy-MM-dd'T'HH:mm:ss.SSS", "EEE, dd MMM yyyy HH:mm:ss zzz", "yyyy-MM-dd"))at [Source: (String)"[{ "s__uuid" : "ABC123", "s__name" : "row_1", "d__timestamp" : "2022-11-23T15:21:50.123456Z"},{ "s__uuid" : "DEF234", "s__name" : "row_2", "d__timestamp" : "2022-23-11T15:21:50.123456Z"},{ "s__uuid" : "GHI345", "s__name" : "row_3", "d__timestamp" : "NOT_A_TIMESTAMP"},{ "s__uuid" : "JKL345", "s__name" : "row_4"},{ "s__name" : "row_5", "d__timestamp" : "2022-11-23T15:21:50.123456Z"},{ "s__uuid" : "MNO456", "d__timestamp" : "2022-11-23T15:21:50.123456Z"},{ "s__uuid" : "PQR567", "s__name" : "row_6","[truncated 49 chars]; line: 1, column: 250] (through reference chain: java.util.ArrayList[2]->SSEC.DataObject["d__timestamp"])
+
+
+Invalid Name Test
+
+Nov 27, 2022 12:27:31 PM SSEC.HTTPHandlerTest sendMessage
+INFO: Message Sent to Server: [{ "s__uuid" : "ABC123", "s__name" : "row_1", "d__timestamp" : "2022-11-23T15:21:50.123456Z"}
+{ "s__uuid" : "DEF234", "s__name" : "row_2", "d__timestamp" : "2022-23-11T15:21:50.123456Z"}
+{ "s__uuid" : "GHI345", "s__name" : "row_3", "d__timestamp" : "2022-26-11T23:46:50.123456Z"}
+{ "s__uuid" : "JKL345", "s__name" : "row_4"}
+{ "s__name" : "row_5", "d__timestamp" : "2022-11-23T15:21:50.123456Z"}
+{ "s__uuid" : "MNO456", "d__timestamp" : "2022-11-23T15:21:50.123456Z"}
+{ "s__uuid" : "PQR567", "s__name" : "row_6", "d__timestamp" : "2022-11-23T15:21:50.123456Z"}]
+Nov 27, 2022 12:27:31 PM SSEC.HTTPHandlerTest readResponseStream
+INFO: Message Received from Server: ResponseCode 400 - Object 5 has no name
+
+
+Valid Successful Request 
+
+Nov 27, 2022 12:27:47 PM SSEC.HTTPHandlerTest sendMessage
+INFO: Message Sent to Server: [{ "s__uuid" : "ABC123", "s__name" : "row_1", "d__timestamp" : "2022-11-23T15:21:50.123456Z"}
+{ "s__uuid" : "DEF234", "s__name" : "row_2", "d__timestamp" : "2022-23-11T15:21:50.123456Z"}
+{ "s__uuid" : "GHI345", "s__name" : "row_3", "d__timestamp" : "2022-26-11T23:46:50.123456Z"}
+{ "s__uuid" : "JKL345", "s__name" : "row_4"}
+{ "s__name" : "row_5", "d__timestamp" : "2022-11-23T15:21:50.123456Z"}
+{ "s__uuid" : "MNO456", "s__name" : "row_5.5", "d__timestamp" : "2022-11-23T15:21:50.123456Z"}
+{ "s__uuid" : "PQR567", "s__name" : "row_6", "d__timestamp" : "2022-11-23T15:21:50.123456Z"}]
+Nov 27, 2022 12:27:47 PM SSEC.HTTPHandlerTest readResponseStream
+INFO: Message Received from Server: ResponseCode 200 - Data successfully stored in the database
+
+
+Empty Post Request Test
+
+Nov 27, 2022 12:28:21 PM SSEC.HTTPHandlerTest sendMessage
+INFO: Message Sent to Server: 
+Nov 27, 2022 12:28:21 PM SSEC.HTTPHandlerTest readResponseStream
+INFO: Message Received from Server: ResponseCode 400 - No content to map due to end-of-inputat [Source: (String)""; line: 1, column: 0]
+
+
+Get request using a sample get character list for user 
+
+Nov 27, 2022 12:28:56 PM SSEC.HTTPHandlerTest getRequestTest
+INFO: Message Sent to Server: http://localhost:8001/test?characterList=User
+Nov 27, 2022 12:28:56 PM SSEC.HTTPHandlerTest readResponseStream
+INFO: Message Received from Server: ResponseCode 200 - characterList for User: Char1,Char2,Char3
