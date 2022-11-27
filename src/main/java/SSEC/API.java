@@ -41,7 +41,6 @@ public class API {
         logger.log(Level.INFO, " Version: " + properties.getProperty("version"));
 
         HttpServer server = HttpServer.create(new InetSocketAddress(HOSTNAME, PORT), 0);
-
         server.createContext("/test", new  HTTPHandler());
         server.setExecutor(threadPoolExecutor);
         server.start();

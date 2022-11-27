@@ -49,8 +49,6 @@ public class HTTPHandler implements HttpHandler {
             case "POST":
                 handlePostRequest(httpExchange);
                 break;
-            case "DELETE":
-                break;
         }
     }
 
@@ -105,12 +103,10 @@ public class HTTPHandler implements HttpHandler {
         sendResponse(httpExchange, "Data successfully stored in the database", 200);
     }
 
-    private String handleGetRequest(HttpExchange httpExchange) {
-        return httpExchange.
-                getRequestURI()
-                .toString()
-                .split("\\?")[1]
-                .split("=")[1];
+    private void handleGetRequest(HttpExchange httpExchange) throws IOException {
+        String request = httpExchange.getRequestURI().toString().split("\\?")[1].split("=")[0];
+        String value = httpExchange.getRequestURI().toString().split("\\?")[1].split("=")[1];
+        sendResponse(httpExchange, request + " for " + value + ": Char1,Char2,Char3", 200);
     }
 
     private void sendResponse(HttpExchange httpExchange, String message, int responseCode) throws IOException {
