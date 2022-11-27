@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.Properties;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.logging.Level;
@@ -17,6 +18,10 @@ public class API {
 
     public static void main(String[] args) throws IOException {
         logger.log(Level.INFO, " SSEC API Starting...");
+
+        final Properties properties = new Properties();
+        properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("SSEC.properties"));
+        logger.log(Level.INFO, " Version: " + properties.getProperty("version"));
 
         HttpServer server = HttpServer.create(new InetSocketAddress(HOSTNAME, PORT), 0);
 

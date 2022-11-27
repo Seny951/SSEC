@@ -1,8 +1,8 @@
 package SSEC;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.ReferenceType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -75,8 +75,7 @@ public class HTTPHandler implements HttpHandler {
         List<DataObject> objList;
         try {
             objList = objectMapper.readValue(s, typeFactory.constructCollectionType(List.class, DataObject.class));
-            objList = objectMapper.readValue(s, ReferenceType.class);
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             API.logger.log(Level.SEVERE, e.getMessage());
 
             // send error response
