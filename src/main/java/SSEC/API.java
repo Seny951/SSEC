@@ -33,5 +33,6 @@ public class API {
         Tests.PostInvalidDateTest();
         Tests.PostValidDataTest();
         Tests.PostEmptyRequestTest();
+        Tests.PostInvalidNameTest();
     }
 }

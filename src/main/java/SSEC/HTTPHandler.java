@@ -91,6 +91,10 @@ public class HTTPHandler implements HttpHandler {
                     API.logger.log(Level.WARNING, "Object " + objList.indexOf(t) + " in request has no uuid, generating a default");
                     t.setS__uuid(generateuuid(6));
                 }
+
+                if(t.getS__name() == null || t.getS__name().isEmpty()) {
+                    sendResponse(httpExchange, "Object " + objList.indexOf(t) + " has no name", 400);
+                }
             }
         }
 
