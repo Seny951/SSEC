@@ -46,10 +46,5 @@ public class API {
         server.setExecutor(threadPoolExecutor);
         server.start();
         logger.log(Level.INFO, " Server started on port 8001");
-
-        Tests.PostInvalidDateTest();
-        Tests.PostValidDataTest();
-        Tests.PostEmptyRequestTest();
-        Tests.PostInvalidNameTest();
     }
 }

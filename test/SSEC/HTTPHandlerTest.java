@@ -1,5 +1,7 @@
 package SSEC;
 
+import org.junit.jupiter.api.Test;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,24 +10,20 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.logging.Level;
 
-// TODO Move to actual unit tests
-public class Tests {
-    public static void PostInvalidDateTest() throws IOException {
-        URL url = new URL ("http://localhost:8001/test");
-        HttpURLConnection con = (HttpURLConnection)url.openConnection();
-        con.setRequestMethod("POST");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Accept", "application/json");
-        con.setDoOutput(true);
+class HTTPHandlerTest {
+
+    @Test
+    void PostInvalidDateTest() throws IOException {
+        HttpURLConnection con = openConnection();
 
         String jsonInputString =
                 "[{ \"s__uuid\" : \"ABC123\", \"s__name\" : \"row_1\", \"d__timestamp\" : \"2022-11-23T15:21:50.123456Z\"}\n" +
-                "{ \"s__uuid\" : \"DEF234\", \"s__name\" : \"row_2\", \"d__timestamp\" : \"2022-23-11T15:21:50.123456Z\"}\n" +
-                "{ \"s__uuid\" : \"GHI345\", \"s__name\" : \"row_3\", \"d__timestamp\" : \"NOT_A_TIMESTAMP\"}\n" +
-                "{ \"s__uuid\" : \"JKL345\", \"s__name\" : \"row_4\"}\n" +
-                "{ \"s__name\" : \"row_5\", \"d__timestamp\" : \"2022-11-23T15:21:50.123456Z\"}\n" +
-                "{ \"s__uuid\" : \"MNO456\", \"d__timestamp\" : \"2022-11-23T15:21:50.123456Z\"}\n" +
-                "{ \"s__uuid\" : \"PQR567\", \"s__name\" : \"row_6\", \"d__timestamp\" : \"2022-11-23T15:21:50.123456Z\"}]";
+                        "{ \"s__uuid\" : \"DEF234\", \"s__name\" : \"row_2\", \"d__timestamp\" : \"2022-23-11T15:21:50.123456Z\"}\n" +
+                        "{ \"s__uuid\" : \"GHI345\", \"s__name\" : \"row_3\", \"d__timestamp\" : \"NOT_A_TIMESTAMP\"}\n" +
+                        "{ \"s__uuid\" : \"JKL345\", \"s__name\" : \"row_4\"}\n" +
+                        "{ \"s__name\" : \"row_5\", \"d__timestamp\" : \"2022-11-23T15:21:50.123456Z\"}\n" +
+                        "{ \"s__uuid\" : \"MNO456\", \"d__timestamp\" : \"2022-11-23T15:21:50.123456Z\"}\n" +
+                        "{ \"s__uuid\" : \"PQR567\", \"s__name\" : \"row_6\", \"d__timestamp\" : \"2022-11-23T15:21:50.123456Z\"}]";
 
         try(OutputStream os = con.getOutputStream()) {
             byte[] input = jsonInputString.getBytes("utf-8");
@@ -50,14 +48,9 @@ public class Tests {
         con.disconnect();
     }
 
-    public static void PostInvalidNameTest() throws IOException {
-        // Post Test
-        URL url = new URL ("http://localhost:8001/test");
-        HttpURLConnection con = (HttpURLConnection)url.openConnection();
-        con.setRequestMethod("POST");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Accept", "application/json");
-        con.setDoOutput(true);
+    @Test
+    void PostInvalidNameTest() throws IOException {
+        HttpURLConnection con = openConnection();
 
         String jsonInputString =
                 "[{ \"s__uuid\" : \"ABC123\", \"s__name\" : \"row_1\", \"d__timestamp\" : \"2022-11-23T15:21:50.123456Z\"}\n" +
@@ -92,14 +85,9 @@ public class Tests {
         con.disconnect();
     }
 
-    public static void PostValidDataTest() throws IOException {
-        // Post Test
-        URL url = new URL ("http://localhost:8001/test");
-        HttpURLConnection con = (HttpURLConnection)url.openConnection();
-        con.setRequestMethod("POST");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Accept", "application/json");
-        con.setDoOutput(true);
+    @Test
+    void PostValidDataTest() throws IOException {
+        HttpURLConnection con = openConnection();
 
         String jsonInputString =
                 "[{ \"s__uuid\" : \"ABC123\", \"s__name\" : \"row_1\", \"d__timestamp\" : \"2022-11-23T15:21:50.123456Z\"}\n" +
@@ -134,14 +122,9 @@ public class Tests {
         con.disconnect();
     }
 
-    public static void PostEmptyRequestTest() throws IOException {
-        // Post Test
-        URL url = new URL ("http://localhost:8001/test");
-        HttpURLConnection con = (HttpURLConnection)url.openConnection();
-        con.setRequestMethod("POST");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Accept", "application/json");
-        con.setDoOutput(true);
+    @Test
+    void PostEmptyRequestTest() throws IOException {
+        HttpURLConnection con = openConnection();
 
         String jsonInputString = "";
         try(OutputStream os = con.getOutputStream()) {
@@ -167,7 +150,17 @@ public class Tests {
         con.disconnect();
     }
 
-    private static void readResponseStream(BufferedReader br, int responseCode) throws IOException {
+    static HttpURLConnection openConnection() throws IOException {
+        URL url = new URL ("http://localhost:8001/test");
+        HttpURLConnection con = (HttpURLConnection)url.openConnection();
+        con.setRequestMethod("POST");
+        con.setRequestProperty("Content-Type", "application/json");
+        con.setRequestProperty("Accept", "application/json");
+        con.setDoOutput(true);
+        return con;
+    }
+
+    static void readResponseStream(BufferedReader br, int responseCode) throws IOException {
         StringBuilder response = new StringBuilder();
         String responseLine;
         while ((responseLine = br.readLine()) != null) {
