@@ -9,8 +9,7 @@ import java.util.logging.Level;
 
 enum requestTypes {
     POST,
-    GET,
-    DELETE
+    GET
 }
 
 class HTTPHandlerTest {
